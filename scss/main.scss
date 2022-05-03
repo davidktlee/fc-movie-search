@@ -1,0 +1,67 @@
+/* COMMON */
+body {
+  width: vw100;
+  height: vh100;
+}
+.inner {
+  width: 1200px;
+  margin: 0 auto;
+}
+/* HEADER */
+.header {
+  width: vw100;
+  height: 150px;
+  background-color: pink;
+  .inner {
+    height: 150px;
+    background-color: #fff;
+    .title {
+      padding: 10px;
+      text-align: center;
+      font-size: 40px;
+    }
+    .input-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      input {
+        width: 500px;
+        height: 35px;
+        padding-left: 10px;
+        font-size: 20px;
+        border-radius: 5px;
+        &::placeholder {
+          color: pink;
+        }
+      }
+      .material-symbols-outlined {
+        width: 40px;
+        height: 40px;
+        background-color: pink;
+        margin-left: 8px;
+        font-size: 30px;
+      }
+    }
+  }
+}
+/* MAIN */
+.main {
+  width: vw100;
+  height: 1000px;
+  .inner {
+    height: 1000px;
+    background-color: yellow;
+    display: flex;
+    justify-content: center;
+    .movie-container {
+      width: 500px;
+      height: 500px;
+      margin-top: 10px;
+      background-color: #fff;
+      .title {
+        padding: 10px;
+      }
+    }
+  }
+}
