@@ -6,6 +6,7 @@ const btnEl = document.querySelector('.material-symbols-outlined')
 const inputEl = document.querySelector('input')
 
 btnEl.addEventListener('click', () => {
+  containerEl.innerHTML = ''
   getMovie(inputEl.value)
 })
 
