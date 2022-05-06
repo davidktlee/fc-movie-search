@@ -21,8 +21,15 @@ async function getMovie(title) {
   const datas = res.Search
   datas.forEach((data) => {
     const divEl = document.createElement('div')
-    divEl.textContent = data.Title
-    divEl.classList.add('title')
-    containerEl.append(divEl)
+    const titleEl = document.createElement('div')
+    const imgEl = document.createElement('img')
+    titleEl.textContent = `제목 : ${data.Title} (${data.Year})`
+    imgEl.src = data.Poster
+    titleEl.classList.add('title')
+    divEl.classList.add('content')
+    imgEl.classList.add('image')
+    divEl.appendChild(titleEl)
+    divEl.appendChild(imgEl)
+    containerEl.appendChild(divEl)
   })
 }
