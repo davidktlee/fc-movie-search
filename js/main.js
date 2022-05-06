@@ -5,15 +5,9 @@ const containerEl = document.querySelector('.movie-container')
 const btnEl = document.querySelector('.material-symbols-outlined')
 const inputEl = document.querySelector('input')
 
-const changeInput = (e) => {
-  const inputValue = e.target.value
-
-  btnEl.addEventListener('click', () => {
-    getMovie(inputValue)
-  })
-}
-
-inputEl.addEventListener('change', changeInput)
+btnEl.addEventListener('click', () => {
+  getMovie(inputEl.value)
+})
 
 async function getMovie(title) {
   let res = await fetch(`https://www.omdbapi.com?apikey=7035c60c&s=${title}`)
