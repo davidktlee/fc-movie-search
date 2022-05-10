@@ -31,3 +31,25 @@ $pcWidth: 1300px;
     color: rgb(207, 181, 255);
   }
 }
+
+@keyframes move {
+  0% {
+    margin-left: -500px;
+    opacity: 0;
+  }
+  100% {
+    margin-left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes oppositeMove {
+  0% {
+    margin-right: -500px;
+    opacity: 0;
+  }
+  100% {
+    margin-right: 0;
+    opacity: 1;
+  }
+}
