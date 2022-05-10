@@ -1,0 +1,33 @@
+/* VARIABLES */
+$mainColor: rgb(168, 127, 244);
+$movieBackColor: rgb(207, 181, 255);
+$resultColor: rgb(90, 1, 255);
+$button: antiquewhite;
+$buttonHover: rgb(255, 229, 83);
+$tabletWidth: 1200px;
+$mobileWidth: 800px;
+$pcWidth: 1300px;
+/* MEDIAQUERY */
+@mixin tablet {
+  @media (max-width: $tabletWidth) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: $mobileWidth) {
+    @content;
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    color: rgb(90, 1, 255);
+  }
+  50% {
+    color: rgb(168, 127, 244);
+  }
+  100% {
+    color: rgb(207, 181, 255);
+  }
+}
