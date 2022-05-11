@@ -7,6 +7,8 @@ const inputEl = document.querySelector('input')
 const moreBtnEl = document.createElement('button')
 const mainInnerEl = document.querySelector('.main .inner')
 const resultEl = document.createElement('div')
+const sortEl = document.querySelector('select')
+const optionValue = sortEl.options[sortEl.selectedIndex].value
 
 const API_KEY = 'apikey=7035c60c'
 
@@ -23,13 +25,12 @@ const searchMovies = () => {
   searchBtnEl.addEventListener('click', () => {
     containerEl.innerHTML = ''
     resultEl.textContent = ''
-    getMovie(inputEl.value, page)
-    inputEl.value = ''
+    getMovie(inputEl.value.trim(), page)
   })
 
   moreBtnEl.addEventListener('click', () => {
     page += 1
-    getMovie(inputEl.value, page)
+    getMovie(inputEl.value.trim(), page)
   })
 }
 searchMovies()
@@ -48,11 +49,28 @@ const renderMovies = (datas, totalRes, title) => {
     divEl.appendChild(imgEl)
     containerEl.appendChild(divEl)
   })
+
   moreBtnEl.textContent = 'More'
   moreBtnEl.classList.add('moreBtn')
   containerEl.appendChild(moreBtnEl)
 
   resultEl.classList.add('resultDiv')
   resultEl.textContent = `${title}의 총 검색 결과: ${totalRes}개`
+  sortEl.classList.add('view')
+  
+  resultEl.appendChild(sortEl)
   mainInnerEl.prepend(resultEl)
 }
+
+// validation 구현
+
+// datas.forEach((data) => {
+//   arr.push(data.Title)
+//   if (optionValue === '알파벳 오름차순') {
+//     arr = arr.sort(function (a, b) {
+//       if (a < b) return 1
+//       if (a > b) return -1
+//       if (a === b) return 0
+//     })
+//     data.Title = arr
+//   }})
