@@ -34,6 +34,25 @@ body {
       align-items: center;
       margin-top: 20px;
       animation: 1s move ease-in-out;
+      .option-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+        .option-container__option {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 25px;
+          font-weight: bold;
+          color: $mainColor;
+        }
+        .option__radio {
+          width: 25px;
+          height: 25px;
+          border-color: $mainColor;
+        }
+      }
       input {
         width: 20vw;
         height: 4vh;
@@ -85,7 +104,6 @@ body {
     }
     .hideImg {
       display: none;
-      
     }
     .error {
       width: 500px;
@@ -172,6 +190,83 @@ body {
       &:hover {
         background-color: #fff;
         color: $buttonHover;
+      }
+    }
+  }
+}
+.modal {
+  display: none;
+  &.view {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(150, 94, 255, 0.95);
+    position: fixed;
+    top: 0;
+  }
+  .modal-inner {
+    height: 100%; //50rem;
+    margin: auto;
+    z-index: 99;
+    .modal-content {
+      img {
+        width: 60vw;
+        height: 48vh;
+        margin: 0 auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+      .title {
+        width: 60vw;
+        font-size: 50px;
+        position: absolute;
+        top: 450px;
+        left: 0;
+        right: 0;
+        margin: 20px auto;
+        text-align: center;
+        color: #fff;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.1);
+      }
+      .modal__button {
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        top: 5px;
+        right: 25px;
+        background-color: transparent;
+        font-size: 45px;
+        color: #fff;
+      }
+    }
+    .modal-description {
+      width: 80vw;
+      border: 1px solid transparent;
+      position: absolute;
+      top: 550px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      font-size: 30px;
+      padding: 1px;
+      line-height: 1.5;
+      div {
+        color: #fff;
+        margin: 0;
+        border: none;
+      }
+      .view {
+        margin: 5px;
+        border-bottom: 1px solid;
+      }
+      .star-rating {
+        color: #fff;
+        display: inline-block;
+        height: 50px;
+        overflow: hidden;
       }
     }
   }
