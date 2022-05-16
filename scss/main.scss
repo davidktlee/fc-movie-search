@@ -24,9 +24,12 @@ body {
       padding: 10px;
       text-align: center;
       font-size: 40px;
-      color: $mainColor;
       font-weight: bold;
       animation: 1s oppositeMove ease-in;
+      a {
+        text-decoration: none;
+        color: $mainColor;
+      }
     }
     .input-container {
       display: flex;
@@ -46,6 +49,9 @@ body {
           font-size: 25px;
           font-weight: bold;
           color: $mainColor;
+          input {
+            cursor: pointer;
+          }
         }
         .option__radio {
           width: 25px;
@@ -225,11 +231,11 @@ body {
         top: 450px;
         left: 0;
         right: 0;
-        margin: 20px auto;
+        margin: 10px auto;
         text-align: center;
         color: #fff;
         border-radius: 5px;
-        box-shadow: rgba(0, 0, 0, 0.1);
+        box-shadow: 3px 3px 3px 3px $movieBackColor;
       }
       .modal__button {
         width: 80px;
@@ -249,7 +255,7 @@ body {
       top: 550px;
       left: 0;
       right: 0;
-      margin: 0 auto;
+      margin: 15px auto;
       font-size: 30px;
       padding: 1px;
       line-height: 1.5;

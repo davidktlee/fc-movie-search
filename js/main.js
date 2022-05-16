@@ -1,7 +1,6 @@
 // req 예시 https://www.omdbapi.com?apikey=7035c60c&s=frozen&page=3
 // data 요청 https://www.omdbapi.com?apikey=[7035c60c]&
 import '../scss/main.scss'
-
 const bodyEl = document.querySelector('body')
 const containerEl = document.querySelector('.movie-container')
 const searchBtnEl = document.querySelector('.search__button')
@@ -17,7 +16,11 @@ const modalContainer = document.querySelector('.modal')
 const modalContent = document.querySelector('.modal-content')
 const modalDescription = document.querySelector('.modal-description')
 const modalBtn = document.querySelector('.modal__button')
-const optionEls = document.querySelectorAll('.option-container__option')
+// series 변수
+// const optionEls = document.querySelectorAll('.option-container__option')
+// const optionEls = document.querySelectorAll('.option__label')
+
+let page = 1
 
 const API_KEY = 'apikey=7035c60c'
 
@@ -38,71 +41,86 @@ async function getMovie(title, page) {
     console.log(error)
   }
 }
-// 시리즈 불러오기 구현 할 것
-async function getSeries(title, page) {
-  try {
-    let seriesRes = await fetch(
-      `https://www.omdbapi.com?${API_KEY}&s=${title}&type=series&page=${page}`
-    )
-    seriesRes = await seriesRes.json()
-    const datas = seriesRes.Search
-    const totalRes = seriesRes.totalResults
-    console.log(seriesRes)
-    renderMovies(datas, totalRes, title)
-  } catch (err) {
-    renderError()
-  }
-}
+// 시리즈 불러오기 구현
+// async function getSeries(title, page) {
+//   loadingFunc()
+//   try {
+//     let seriesRes = await fetch(
+//       `https://www.omdbapi.com?${API_KEY}&s=${title}&type=series&page=${page}`
+//     )
+//     const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay))
+//     await wait(1000)
+//     seriesRes = await seriesRes.json()
+//     const datas = seriesRes.Search
+//     const totalRes = seriesRes.totalResults
+//     console.log(seriesRes)
+//     renderSeries(datas, totalRes, title)
+//   } catch (err) {
+//     renderError()
+//   }
+// }
 
-// 옵션 선택
-optionEls.forEach((optionEl) => {
-  optionEl.addEventListener('click', (e) => {
-    if (e.target.getAttribute('data-value') === 'movie') {
-      console.log(e)
-      searchMovies()
-    }
-    if (e.target.getAttribute('data-value') === 'series') {
-      console.log(e.target.getAttribute('data-value'))
-      searchSeries()
-    }
-  })
-})
+// 시리즈, 영화 옵션 선택
+// 시리즈 클릭했다가 영화 클릭 하면 값이 바뀌면서 오류
+// optionEls.forEach((optionEl) => {
+//   optionEl.addEventListener('click', (e) => {
+//     const targetName = e.target.getAttribute('data-value')
+//     if (targetName === 'movie') {
+//       console.log(targetName)
+//       searchMovies()
+//     } else if (targetName === 'series') {
+//       console.log(targetName)
+//       searchSeries()
+//     }
+//   })
+// })
+
 // 시리즈 검색
-const searchSeries = () => {
-  inputEl.setAttribute('placeholder', '입력해 주세요 찾는 시리즈를')
-  let page = 1
-  searchBtnEl.addEventListener('click', () => {
-    containerEl.innerHTML = ''
-    resultEl.textContent = ''
-    getSeries(inputEl.value.trim(), page)
-  })
+// const searchSeries = () => {
+//   inputEl.setAttribute('placeholder', '입력해 주세요 찾는 시리즈를')
+//   let page = 1
+//   searchBtnEl.addEventListener('click', () => {
+//     containerEl.innerHTML = ''
+//     resultEl.textContent = ''
+//     getSeries(inputEl.value.trim(), page)
+//   })
 
-  moreBtnEl.addEventListener('click', () => {
-    page += 1
-    getSeries(inputEl.value.trim(), page)
-  })
-}
+//   moreBtnEl.addEventListener('click', () => {
+//     page += 1
+//     getSeries(inputEl.value.trim(), page)
+//   })
+// }
+
 // 영화 검색
-const searchMovies = () => {
-  let page = 1
-  inputEl.setAttribute('placeholder', '입력해 주세요 찾는 시리즈를')
-  searchBtnEl.addEventListener('click', () => {
-    containerEl.innerHTML = ''
-    resultEl.textContent = ''
-    getMovie(inputEl.value.trim(), page)
-  })
 
-  moreBtnEl.addEventListener('click', () => {
-    page += 1
-    getMovie(inputEl.value.trim(), page)
-  })
-}
+searchBtnEl.addEventListener('click', () => {
+  containerEl.innerHTML = ''
+  resultEl.textContent = ''
+  getMovie(inputEl.value.trim(), page)
+})
+
+moreBtnEl.addEventListener('click', () => {
+  page += 1
+  getMovie(inputEl.value.trim(), page)
+})
+
+// const beforeSearch = () => {
+//   selectOption()
+//   if (selectOption) {
+//     searchMovies()
+//   } else {
+//     searchSeries()
+//   }
+// }
+// beforeSearch()
+
 // 자세한 영화정보 불러오기
 async function getSpecificMovie(id) {
   let response = await fetch(`https://www.omdbapi.com?${API_KEY}&i=${id}`)
   response = await response.json()
   viewModal(response)
 }
+
 // 영화정보 모달
 const viewModal = (data) => {
   bodyEl.style.overflow = 'hidden'
@@ -127,20 +145,20 @@ const viewModal = (data) => {
   modalRate.className = 'star-rating'
 
   if (data.imdbRating < Number('2')) {
-    modalRate.innerHTML = `<span>평점: ${data.imdbRating}⭐</span>`
+    modalRate.innerHTML = `<span>평점: ${data.imdbRating}★☆☆☆☆</span>`
   } else if (data.imdbRating < Number('3')) {
-    modalRate.innerHTML = `<span>평점: ${data.imdbRating}⭐⭐</span>`
+    modalRate.innerHTML = `<span>평점: ${data.imdbRating}★★☆☆☆</span>`
   } else if (data.imdbRating < Number('7')) {
-    modalRate.innerHTML = `<span>평점: ${data.imdbRating}⭐⭐⭐</span>`
+    modalRate.innerHTML = `<span>평점: ${data.imdbRating}★★★☆☆</span>`
   } else if (data.imdbRating < Number('9')) {
-    modalRate.innerHTML = `<span>평점: ${data.imdbRating}⭐⭐⭐⭐</span>`
+    modalRate.innerHTML = `<span>평점: ${data.imdbRating}★★★★☆</span>`
   } else {
-    modalRate.innerHTML = `<span>평점: ${data.imdbRating}⭐⭐⭐⭐⭐</span>`
+    modalRate.innerHTML = `<span>평점: ${data.imdbRating}★★★★★</span>`
   }
-  modalDescription.appendChild(modalGenre)
-  modalDescription.appendChild(modalActors)
-  modalDescription.appendChild(modalPlot)
-  modalDescription.appendChild(modalRate)
+  modalDescription.append(modalGenre, modalActors, modalPlot, modalRate)
+  // modalDescription.appendChild(modalActors)
+  // modalDescription.appendChild(modalPlot)
+  // modalDescription.appendChild(modalRate)
   modalContent.appendChild(modalDescription)
   modalContent.appendChild(posterEl)
   modalContent.appendChild(modalTitle)
@@ -207,7 +225,6 @@ const renderMovies = (datas, totalRes, title) => {
   loadingEl.classList.remove('viewImg')
   loadingEl.classList.add('hideImg')
 }
-// 모달 구현
 
 // 로딩 함수
 const loadingFunc = () => {
