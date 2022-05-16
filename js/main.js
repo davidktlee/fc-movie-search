@@ -35,6 +35,7 @@ async function getMovie(title, page) {
     res = await res.json()
     const datas = res.Search
     const totalRes = res.totalResults
+    console.log(datas)
     renderMovies(datas, totalRes, title)
   } catch (error) {
     renderError(error)
@@ -202,6 +203,9 @@ const renderMovies = (datas, totalRes, title) => {
     divEl.appendChild(titleEl)
     divEl.appendChild(imgEl)
     containerEl.appendChild(divEl)
+    if (data.Poster === 'N/A') {
+      imgEl.src = './KakaoTalk_20220503_144117188.jpg'
+    }
 
     const imdbId = divEl.getAttribute('data-id')
 
