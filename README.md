@@ -20,51 +20,54 @@
 - [x] Webpack 프로젝트로 구성해보세요.
 - [ ] 클라이언트에서 API Key가 노출되지 않도록 만들어보세요.
 - [ ] 무한 스크롤을 위한 'Intersection Observer'를 활용해보세요.
-- [ ] 최초 API 요청(Request)에 대한 로딩 애니메이션을 추가해보세요.
+- [x] 최초 API 요청(Request)에 대한 로딩 애니메이션을 추가해보세요.
 - [x] SCSS, Bootstrap 등을 구성해 프로젝트를 최대한 예쁘게(?) 만들어보세요.
 - [ ] 영화 포스터 주소에 포함된 `SX300`를 `SX700`과 같이 더 큰 숫자로 수정해 요청하세요.
 - [ ] 실시간으로 이미지의 크기를 다르게 요청하는 것이 어떤 원리로 가능한지 조사해보세요.
 - [ ] 요청 주소에 HTTP가 아닌 HTTPS 프로토콜을 사용해야 하는 이유를 조사해보세요.
 
-## API 사용법
+## Result
 
 - 참고 사이트: [The Open Movie Database](http://www.omdbapi.com/)
-- 요청 주소: `https://www.omdbapi.com`
-- Method: `GET`
-- API_KEY: `7035c60c`
+- 배포 사이트: [Olleh KT MOVIE](https://exquisite-chaja-6bf366.netlify.app/)
 
-### 영화 목록 검색
+## Skills
 
-| 파라미터 | 필수 | 설명             | 기본값 | 유효 값   |
-| -------- | ---- | ---------------- | ------ | --------- |
-| `s`      | 예   | 검색할 영화 제목 |        |
-| `y`      |      | 영화 출시 년도   |        |
-| `page`   |      | 검색 결과 페이지 | `1`    | `1`~`100` |
+![HTML5](https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=flat-square&logo=css3)
+![JavaScript](https://img.shields.io/badge/-JavaScript-yellow?style=flat-square&logo=javascript)
 
-요청 예시:
+## 느낀점
 
-```url
-https://www.omdbapi.com?apikey=7035c60c&s=frozen&page=3
-```
+### 클라이언트에서 API Key가 노출되지 않도록 만들어보세요.
 
-응답 예시:
+강사님의 뷰 강의를 보고 구글링을 하면서 .env에 대해서도 보고 netlify serverless functions 에 대해서도 알게 되었는데
+실제 활용을 할 수 있을만큼의 이해가 되지 않아서 구현하지 못했다.
+프론트에서 보안 이슈가 있을 수 있기 때문에 중요한 부분 중 하나인 것 같다.
 
-- `Search`: 영화 목록, 1페이지(`page`) 당 최대 10개
-- `totalResults`: 검색 가능한 모든 영화 개수
+### 무한 스크롤을 위한 'Intersection Observer'를 활용해보세요.
 
-```json
-{
-  "Search": [
-    {
-      "Title": "Frozen",
-      "Year": "2013",
-      "imdbID": "tt2294629",
-      "Type": "movie",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BMjA0YjYy...eQXVyNDg4NjY5OTQ@._V1_SX300.jpg"
-    },
-    "...최대10개"
-  ],
-  "totalResults": "263",
-  "Response": "True"
-}
-```
+이 부분도 마찬가지로 'Intersection Observer' 에 대한 이해도가 부족해 구현하지 못했다.
+버튼을 이용한 '더 보기' 만 구현하였다.
+
+### 영화 포스터 주소에 포함된 `SX300`를 `SX700`과 같이 더 큰 숫자로 수정해 요청하세요, 실시간으로 이미지의 크기를 다르게 요청하는 것이 어떤 원리로 가능한지 조사해보세요.
+
+아직 비동기 부분이나 get 부분이 익숙치 않고 어떤 식으로 요청을 보내야 하는지 생각이 떠오르지가 않는다..
+
+### 요청 주소에 HTTP가 아닌 HTTPS 프로토콜을 사용해야 하는 이유를 조사해보세요.
+
+HTTP 프로토콜은 서버에서 브라우저로 전송되는 정보가 암호화되지 않아 데이터가 쉽게 도난 당할 수 있다.
+반면, HTTPS 프로토콜은 SSL(Secure Socket Layer)을 사용해 서버와 브라우저 사이에 안전하게 암호화 된 연결을 만들 수 있게 도와주고 서버 브라우저가 민감한 정보를 주고 받을 때 그 정보가 도난당하는 것을 막아준다.
+도난 당하더라도 데이터가 암호화 되어 있어 해독하기 쉽지 않다.
+또한 구글에서 SEO에 있어서도 가산점을 줬다.
+
+### 구현하면서..
+
+리액트 공부와 vue 강의를 조금씩 보면서 이 과제를 했는데 데이터와 화면을 같이 관리한다는게 얼마나 귀찮은 일 인지 깨닫게 되고 해야할 일이 2배, 3배로 늘어난다는 것을 알게 되었다. 최대한 html을 사용하지 않고 js로 구현하려다 보니 코드가 많이 길어진 것도 있는 것 같고 코드 최적화도 생각하지 않았다 보니 내가 짠 코드가 맞는 코드인지도 잘 모르겠다. 또 비동기나 api 부분이 많이 부족하다는 생각이 들었다.
+구현되지 않은 기능이 많지만 과제를 하면서 로직에 대해 고민하면서 컴퓨터적 사고를 하려고 많이 노력했고 또 전보다는 잘 되는 것 같았다. 
+
+### 구현하지 못한 것
+1. 영화 체크나 시리즈 체크를 하면 체크값에 대한 검색을 실행하는 것, 또 그에 대한 에러 처리를 하는 것 
+2. 반응형 사이트로 하려고 했으나 하다가 잘 모르겠어서 포기
+3. validation 함수를 이용해 영화의 순서를 분류하려고 했으나 실패
+4. 많은 변수들이나 함수들을 컴포넌트화 시키고 싶었으나 모듈에 대한 이해도 부족으로 실패:
