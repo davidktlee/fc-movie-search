@@ -20,6 +20,16 @@ const modalBtn = document.querySelector('.modal__button')
 // const optionEls = document.querySelectorAll('.option-container__option')
 // const optionEls = document.querySelectorAll('.option__label')
 
+//intersection observer
+// const io = new IntersectionObserver((entries) => {
+//   entries.forEach((entry) => {
+//     if (entry.isIntersecting) {
+//       page += 1
+//       getMovie(inputEl.value.trim(), page)
+//     }
+//   })
+// })
+// io.observe(moreBtnEl)
 let page = 1
 
 const API_KEY = 'apikey=7035c60c'
@@ -35,71 +45,18 @@ async function getMovie(title, page) {
     res = await res.json()
     const datas = res.Search
     const totalRes = res.totalResults
-    console.log(datas)
     renderMovies(datas, totalRes, title)
+    page += 1
   } catch (error) {
     renderError(error)
-    console.log(error)
   }
 }
-// 시리즈 불러오기 구현
-// async function getSeries(title, page) {
-//   loadingFunc()
-//   try {
-//     let seriesRes = await fetch(
-//       `https://www.omdbapi.com?${API_KEY}&s=${title}&type=series&page=${page}`
-//     )
-//     const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay))
-//     await wait(1000)
-//     seriesRes = await seriesRes.json()
-//     const datas = seriesRes.Search
-//     const totalRes = seriesRes.totalResults
-//     console.log(seriesRes)
-//     renderSeries(datas, totalRes, title)
-//   } catch (err) {
-//     renderError()
-//   }
-// }
-
-// 시리즈, 영화 옵션 선택
-// 시리즈 클릭했다가 영화 클릭 하면 값이 바뀌면서 오류
-// optionEls.forEach((optionEl) => {
-//   optionEl.addEventListener('click', (e) => {
-//     const targetName = e.target.getAttribute('data-value')
-//     if (targetName === 'movie') {
-//       console.log(targetName)
-//       searchMovies()
-//     } else if (targetName === 'series') {
-//       console.log(targetName)
-//       searchSeries()
-//     }
-//   })
-// })
-
-// 시리즈 검색
-// const searchSeries = () => {
-//   inputEl.setAttribute('placeholder', '입력해 주세요 찾는 시리즈를')
-//   let page = 1
-//   searchBtnEl.addEventListener('click', () => {
-//     containerEl.innerHTML = ''
-//     resultEl.textContent = ''
-//     getSeries(inputEl.value.trim(), page)
-//   })
-
-//   moreBtnEl.addEventListener('click', () => {
-//     page += 1
-//     getSeries(inputEl.value.trim(), page)
-//   })
-// }
-
 // 영화 검색
-
 searchBtnEl.addEventListener('click', () => {
   containerEl.innerHTML = ''
   resultEl.textContent = ''
   getMovie(inputEl.value.trim(), page)
 })
-
 moreBtnEl.addEventListener('click', () => {
   page += 1
   getMovie(inputEl.value.trim(), page)
@@ -238,6 +195,55 @@ const loadingFunc = () => {
   mainInnerEl.appendChild(loadingEl)
   errorContainerEl.innerHTML = ''
 }
+// 시리즈 불러오기 구현
+// async function getSeries(title, page) {
+//   loadingFunc()
+//   try {
+//     let seriesRes = await fetch(
+//       `https://www.omdbapi.com?${API_KEY}&s=${title}&type=series&page=${page}`
+//     )
+//     const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay))
+//     await wait(1000)
+//     seriesRes = await seriesRes.json()
+//     const datas = seriesRes.Search
+//     const totalRes = seriesRes.totalResults
+//     console.log(seriesRes)
+//     renderSeries(datas, totalRes, title)
+//   } catch (err) {
+//     renderError()
+//   }
+// }
+
+// 시리즈, 영화 옵션 선택
+// 시리즈 클릭했다가 영화 클릭 하면 값이 바뀌면서 오류
+// optionEls.forEach((optionEl) => {
+//   optionEl.addEventListener('click', (e) => {
+//     const targetName = e.target.getAttribute('data-value')
+//     if (targetName === 'movie') {
+//       console.log(targetName)
+//       searchMovies()
+//     } else if (targetName === 'series') {
+//       console.log(targetName)
+//       searchSeries()
+//     }
+//   })
+// })
+
+// 시리즈 검색
+// const searchSeries = () => {
+//   inputEl.setAttribute('placeholder', '입력해 주세요 찾는 시리즈를')
+//   let page = 1
+//   searchBtnEl.addEventListener('click', () => {
+//     containerEl.innerHTML = ''
+//     resultEl.textContent = ''
+//     getSeries(inputEl.value.trim(), page)
+//   })
+
+//   moreBtnEl.addEventListener('click', () => {
+//     page += 1
+//     getSeries(inputEl.value.trim(), page)
+//   })
+// }
 
 // validation 구현
 

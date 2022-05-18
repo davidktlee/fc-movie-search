@@ -209,11 +209,12 @@ body {
     background-color: rgba(150, 94, 255, 0.95);
     position: fixed;
     top: 0;
+    z-index: 100;
   }
   .modal-inner {
     height: 100%; //50rem;
     margin: auto;
-    z-index: 99;
+
     .modal-content {
       img {
         width: 60vw;
